@@ -23,6 +23,7 @@ function setupModeButtons() {
       modeButtons[1].classList.remove("selected");
       this.classList.add("selected")
       this.textContent === "Easy" ? numSquares = 3 : numSquares = 6;
+      messageDisplay.textContent = "";
       reset();
     })
   }
@@ -35,11 +36,10 @@ function setupSquares() {
       // grab color of picked square, then compare with picked color
       var clickedColor = this.style.background;
       if (clickedColor === pickedColor) {
-        messageDisplay.textContent = "Correct!";
         changeColors(clickedColor);
         h1.style.background = clickedColor;
         resetBtn.textContent = "Play again?";
-        messageDisplay.textContent = "";
+        messageDisplay.textContent = "Correct!";
       } else {
         this.style.background = "#232323";
         messageDisplay.textContent = "Try Again";
@@ -54,7 +54,6 @@ function reset() {
   colors = generateRandomColors(numSquares);
   pickedColor = pickColor();
   colorDisplay.textContent = pickedColor;
-  messageDisplay.textContent = "";
   for (var i = 0; i < squares.length; i++) {
     if (colors[i]) {
       squares[i].style.display = "block";
@@ -66,6 +65,7 @@ function reset() {
 }
 
 resetBtn.addEventListener("click", function() {
+  messageDisplay.textContent = "";
   reset();
 })
 
